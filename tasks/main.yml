@@ -5,7 +5,7 @@
   user: name=graphdat group=graphdat state=present
 
 - name: Fetch and Save config 
-  command: curl -d '{\'token\':\'{{ boundary_agent_api_token }}\'}' -H "Content-Type&#58; application/json" https://{{ boundary_host }}/agent/config --output /etc/{{ boundary_agent_config }} --silent
+  command: curl -d '{\"token\":\"{{ boundary_agent_api_token }}\"}' -H "Content-Type{{':'}} application/json" https://{{ boundary_host }}/agent/config --output /etc/{{ boundary_agent_config }} --silent
   args:
     creates: /etc/{{ boundary_agent_config }}
 
