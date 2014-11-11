@@ -1,0 +1,20 @@
+- include: debian.yml
+  when: "ansible_os_family == 'Debian'"
+
+- name: Boundary agent user group 
+  user: name=graphdat group=graphdat state=present
+
+- name: Fetch and Save config 
+  command: "curl -d '{\'token\':\'{{ boundary_agent_api_token }}\'}' -H 'Content-Type: application/json' https://{{ boundary_host }}/agent/config --output /etc/{{ boundary_agent_config }} --silent" creates=/etc/{{ boundary_agent_config }}
+
+- name: Add hostname to config file
+  lineinfile: 
+    - dest: /etc/{{ boundary_agent_config }} 
+      regexp: "[hostname]{0,0}" 
+      insertafter: EOF 
+      line: "hostname: {{ ansible_hostname }} "
+      state: present
+
+- name: Start agent 
+  service: name=graphdat state=started enabled=yes
+

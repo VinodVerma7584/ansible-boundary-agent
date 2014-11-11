@@ -1,0 +1,15 @@
+---
+
+boundary_agent_api_token: YOUR_TOKEN
+boundary_host: "premium.boundary.com"
+boundary_apt_host: "premium-apt.boundary.com"
+
+boundary_agent_config: "graphdat.conf"
+boundary_agent_name: "graphdat-agent"
+boundary_agent_environment: "production"
+
+boundary_agent_user: "graphdat"
+boundary_agent_group: "graphdat"
+
+boundary_apt_url: "http://premium-apt.boundary.com/production {{ ansible_distribution_release }} non-free"
+

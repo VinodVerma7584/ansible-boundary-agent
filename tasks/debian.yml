@@ -1,0 +1,11 @@
+---
+
+- name: Add boundary apt repository key
+  apt_key: url=https://{{ boundary_apt_host }}/packages.graphdat.gpg state=present
+
+- name: Add boundary apt repository
+  apt_repository: repo={{ boundary_apt_url }} state=present
+
+- name: Install lastest boundary agent via apt
+  apt: pkg={{ boundary_agent_name }} state=lastest update_cache=yes
+
